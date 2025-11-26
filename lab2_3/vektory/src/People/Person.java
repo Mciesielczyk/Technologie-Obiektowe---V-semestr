@@ -24,6 +24,7 @@ public class Person implements Serializable , Cloneable{
     public static double infectionRadius = 2;
 
     private Vector2D position;
+    private Vector2D posvector;
 
     private double vx=Math.random(),vy=Math.random();
     private double maxSpeed=2.5;
@@ -54,8 +55,8 @@ public class Person implements Serializable , Cloneable{
 }
     public Person(double x, double y, PupulationManager pupulationManager) {
         position = new Vector2D(x, y);
+        posvector = new Vector2D(x, y);
         this.pupulationManager = pupulationManager;
-        //active = true;
         double random =  Math.random();
         if(random <= 0.1){
           this.state = new InfectedState();
@@ -86,13 +87,14 @@ public class Person implements Serializable , Cloneable{
             nextDirChangeTime = 1 + Math.random() * 4; // nowe losowe opóźnienie
             vx = speed * Math.cos(angle);
             vy = speed * Math.sin(angle);
+            posvector.setComponents(vx,vy); // wektor skladowy predkosci
         }
 
 
          double tx = position.getX()+vx*dt;
-         double ty = position.getY()+vy*dt;
-         reflectOrExit(tx,ty);
-         position.setComponents(tx,ty);
+         double ty = position.getY()+vy*dt; //oblicznnaie nowej pozycji
+         reflectOrExit(tx,ty); //sprawdzamy czy wycodzi
+         position.setComponents(tx,ty); //ustawianie koncowej
 
     }
 
@@ -152,7 +154,7 @@ public class Person implements Serializable , Cloneable{
         try {
             Person copy = (Person) super.clone();
             copy.position = new Vector2D(position.getX(), position.getY());
-            // skopiuj stan (możesz zrobić deep copy jeśli stan ma dane)
+
             copy.state = this.state;
             copy.speed = this.speed;
             copy.angle = this.angle;

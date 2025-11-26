@@ -13,12 +13,11 @@ public class PupulationManager {
     public double x,y;
     public double time;
     public double stepTime=0.04;
-    private double newPersonFreq;
-    public double maxSpeed = 2.5;
+   // public double maxSpeed = 2.5; // jest w person
     long startTime = System.currentTimeMillis();
-    double dt=0.04;
+    double dt=0.04; // 1/25 sekundy
     private Random rand;
-    int ilosc = 150;
+    int ilosc = 500;  //ilsc osobnikowo do strworzenia na poczatku symulacji
 
 
 

@@ -29,7 +29,6 @@ public class MapPanel extends JPanel {
         // Timer do animacji
         timer = new Timer((int)(dt * 1000), e -> {
             // aktualizacja pozycji osobników
-
             repaint(); // odświeżenie panelu
         });
         timer.start();
@@ -60,7 +59,6 @@ public class MapPanel extends JPanel {
         }
     }
 
-    // opcjonalnie metoda do zatrzymania animacji
     public void stopAnimation() {
         if (timer != null) timer.stop();
     }

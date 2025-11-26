@@ -30,10 +30,8 @@ public class InfectedState implements PersonState, Serializable {
                         boolean symptomatic = Math.random() < 0.5;
                         other.infect(symptomatic);
                     }
-                   // other.timeSince = 0;
+
                 }
-            } else {
-               // other.timeSince = 0;
             }
         }
     }

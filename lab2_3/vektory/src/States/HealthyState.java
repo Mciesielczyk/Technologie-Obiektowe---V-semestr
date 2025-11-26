@@ -12,7 +12,7 @@ public class HealthyState implements PersonState, Serializable {
             person.tooClose=false;
     }
     @Override
-    public void onContact(Person person, Person otherPerson, double dt) {
+    public void onContact(Person person, Person otherPerson, double dt) { //tylko w infected sprawzamy czy jest blisko
       /*  if(otherPerson.isInfected()){
             double distance = person.distanceTo(otherPerson);
 
