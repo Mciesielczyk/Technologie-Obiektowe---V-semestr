@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SKKM extends Subject {
+    private Event lastEvent;
+    private JRG activeJrg;
 
     private DispatchStrategy strategy;
     private List<JRG> units = List.of(
@@ -32,7 +34,7 @@ public class SKKM extends Subject {
 
 
     public void handleEvent(Event event) {
-
+        this.lastEvent = event;
         if(event.getType() == EventType.PZ){
             setStrategy(new FireStrategy());
         } else {
@@ -44,10 +46,12 @@ public class SKKM extends Subject {
 
         setStrategy(new LocalThreatStrategy());
         List<Car> carsToDispatch = strategy.execute(event, units);
+
+        if (strategy instanceof LocalThreatStrategy lts) {
+            activeJrg = lts.getUsedJrg();
+        }
         int ilosc = carsToDispatch.size();
 
-
-        // powiadamiamy obserwatorów
 
     }
 
@@ -71,5 +75,16 @@ public class SKKM extends Subject {
         this.strategy = strategy;
     }
 
+    public List<JRG> getUnits() {
+        return units;
+    }
+
+    public Event getLastEvent() {
+        return lastEvent;
+    }
+
+    public JRG getActiveJrg() {
+        return activeJrg;
+    }
 
 }

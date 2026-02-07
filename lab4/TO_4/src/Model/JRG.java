@@ -39,6 +39,9 @@ public class JRG {
     public double getY(){
         return this.y;
     }
+    public String getName(){
+        return this.name;
+    }
 
     public CarIterator iterator(){
         return new ConcreteIterator(carsList);

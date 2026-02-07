@@ -16,7 +16,7 @@ public class FreeState implements State {
 
     @Override
     public void returnToBase(Car car) {
-        // nic nie robi
+
     }
 
     @Override

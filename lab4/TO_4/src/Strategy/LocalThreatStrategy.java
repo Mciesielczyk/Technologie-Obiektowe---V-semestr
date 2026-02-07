@@ -20,6 +20,7 @@ public class  LocalThreatStrategy implements DispatchStrategy{
     private long timeToWork;
     private long timeToReturn;
     private long elapsedTime;
+    private JRG usedJrg;
 
     @Override
     public List<Car> execute(Event event, List<JRG> units) {
@@ -33,13 +34,18 @@ public class  LocalThreatStrategy implements DispatchStrategy{
             double d2 = distance(event.getLocation().getX(), event.getLocation().getY(), j2.getX(), j2.getY());
             return Double.compare(d1, d2);
 
-        });
 
+        });
+            System.out.println(sorted.getFirst().getName());
         for(JRG jrg : sorted){
             CarIterator it = jrg.iterator();
             while (it.hasNext()){
                 Car car = it.next();
                if(car.isFree()==true){
+                   if (result.isEmpty()) {
+                       usedJrg = jrg;
+                   }
+
                    result.add(car);
                    losulosu();
                    car.dispatch(timeToReach,timeToWork,timeToReturn);
@@ -66,5 +72,9 @@ public class  LocalThreatStrategy implements DispatchStrategy{
 
     public double distance(double x1, double y1, double x2, double y2){
         return ((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+    }
+
+    public JRG getUsedJrg() {
+        return usedJrg;
     }
 }
